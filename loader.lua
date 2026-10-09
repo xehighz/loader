@@ -2721,11 +2721,11 @@ local function buildWindow(opts)
 		BorderSizePixel = 0,
 		AnchorPoint = Vector2.new(0.5, 0),
 		Position = UDim2.new(0.5, 0, 0, 12),
-		Size = UDim2.fromOffset(230, 34),
+		Size = UDim2.fromOffset(190, 34),
 		ZIndex = 20,
 		Parent = gui,
 	}, { Round(17), Stroke("Stroke") })
-	addLogo(openBtn, 18, UDim2.fromOffset(8, 8), 9)
+	addLogo(openBtn, 22, UDim2.fromOffset(7, 6), 11)
 	New("TextLabel", {
 		Name = "IslandTitle",
 		BackgroundTransparency = 1,
@@ -2736,8 +2736,8 @@ local function buildWindow(opts)
 		TextColor3 = Color3.new(1, 1, 1),
 		TextXAlignment = Enum.TextXAlignment.Left,
 		TextTruncate = Enum.TextTruncate.AtEnd,
-		Position = UDim2.fromOffset(38, 0),
-		Size = UDim2.new(1, -48, 1, 0),
+		Position = UDim2.fromOffset(36, 0),
+		Size = UDim2.new(1, -44, 1, 0),
 		ZIndex = openBtn.ZIndex + 1,
 		Parent = openBtn,
 	})
