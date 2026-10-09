@@ -2308,6 +2308,9 @@ local function buildWindow(opts)
 		if fitMax < 1 then
 			currentScale = math.max(fitMax, 0.5)
 		end
+		if UIS.TouchEnabled then
+			currentScale = math.max(0.5, math.min(currentScale, fitMax, 0.78))
+		end
 		scaleObj.Scale = currentScale
 	end
 	local SIZE_SMALL = math.max(0.5, math.min(0.85, fitMax))
@@ -2712,29 +2715,35 @@ local function buildWindow(opts)
 	-- Dynamic Island-style menu toggle
 	local openBtn = New("TextButton", {
 		Name = "OpenButton",
-		Text = opts.Title or "My Script",
-		Font = Enum.Font.GothamBold,
-		TextSize = 12,
-		TextColor3 = Color3.new(1, 1, 1),
-		TextXAlignment = Enum.TextXAlignment.Left,
-		TextTruncate = Enum.TextTruncate.AtEnd,
+		Text = "",
 		AutoButtonColor = false,
 		BackgroundColor3 = Color3.new(0, 0, 0),
 		BorderSizePixel = 0,
 		AnchorPoint = Vector2.new(0.5, 0),
 		Position = UDim2.new(0.5, 0, 0, 12),
-		Size = UDim2.fromOffset(230, 40),
+		Size = UDim2.fromOffset(230, 34),
 		ZIndex = 20,
 		Parent = gui,
-	}, {
-		Round(20),
-		Stroke("Stroke"),
-		New("UIPadding", {
-			PaddingLeft = UDim.new(0, 48),
-			PaddingRight = UDim.new(0, 12),
-		}),
+	}, { Round(17), Stroke("Stroke") })
+	addLogo(openBtn, 18, UDim2.fromOffset(8, 8), 9)
+	New("TextLabel", {
+		Name = "IslandTitle",
+		BackgroundTransparency = 1,
+		BorderSizePixel = 0,
+		Text = opts.Title or "My Script",
+		Font = Enum.Font.GothamBold,
+		TextSize = 14,
+		TextColor3 = Color3.new(1, 1, 1),
+		TextXAlignment = Enum.TextXAlignment.Left,
+		TextTruncate = Enum.TextTruncate.AtEnd,
+		Position = UDim2.fromOffset(38, 0),
+		Size = UDim2.new(1, -48, 1, 0),
+		ZIndex = openBtn.ZIndex + 1,
+		Parent = openBtn,
 	})
-	addLogo(openBtn, 24, UDim2.fromOffset(9, 8), 12)
+	animateButton(openBtn, function()
+		return Theme.Accent
+	end)
 
 	-- toggle-UI keybind state
 	local NONE_KEY = Enum.KeyCode.Unknown
