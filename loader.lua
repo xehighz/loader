@@ -2200,12 +2200,14 @@ local function buildWindow(opts)
 
 	local logoId = normalizeAsset(opts.Logo)
 	local function addLogo(parent, size, position, radius)
+		local zIndex = parent.ZIndex + 1
 		local fallback = themed(New("TextLabel", {
 			Text = string.upper(string.sub(opts.Title or "M", 1, 1)),
 			Font = Enum.Font.GothamBold,
 			TextSize = math.floor(size * 0.52),
 			TextColor3 = Color3.new(1, 1, 1),
 			BorderSizePixel = 0,
+			ZIndex = zIndex,
 			Position = position,
 			Size = UDim2.fromOffset(size, size),
 			Visible = logoId == nil,
@@ -2217,6 +2219,7 @@ local function buildWindow(opts)
 				BorderSizePixel = 0,
 				Image = logoId,
 				ScaleType = Enum.ScaleType.Fit,
+				ZIndex = zIndex,
 				Position = position,
 				Size = UDim2.fromOffset(size, size),
 				Parent = parent,
@@ -2711,7 +2714,7 @@ local function buildWindow(opts)
 		Name = "OpenButton",
 		Text = opts.Title or "My Script",
 		Font = Enum.Font.GothamBold,
-		TextSize = 13,
+		TextSize = 12,
 		TextColor3 = Color3.new(1, 1, 1),
 		TextXAlignment = Enum.TextXAlignment.Left,
 		TextTruncate = Enum.TextTruncate.AtEnd,
@@ -2720,18 +2723,18 @@ local function buildWindow(opts)
 		BorderSizePixel = 0,
 		AnchorPoint = Vector2.new(0.5, 0),
 		Position = UDim2.new(0.5, 0, 0, 12),
-		Size = UDim2.fromOffset(230, 48),
+		Size = UDim2.fromOffset(230, 40),
 		ZIndex = 20,
 		Parent = gui,
 	}, {
-		Round(24),
+		Round(20),
 		Stroke("Stroke"),
 		New("UIPadding", {
 			PaddingLeft = UDim.new(0, 48),
 			PaddingRight = UDim.new(0, 12),
 		}),
 	})
-	addLogo(openBtn, 30, UDim2.fromOffset(9, 9), 15)
+	addLogo(openBtn, 24, UDim2.fromOffset(9, 8), 12)
 
 	-- toggle-UI keybind state
 	local NONE_KEY = Enum.KeyCode.Unknown
